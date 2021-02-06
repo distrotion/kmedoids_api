@@ -17,25 +17,25 @@ for i in range(1000):
     
     for j in range(9):
         if i%4 == 0:
-            Result.append(random.uniform(5.00,10.00))
+            Result.append(random.uniform(4.00,6.00))
         elif i%4 == 1:
-            Result.append(random.uniform(10.00,15.00))
+            Result.append(random.uniform(12.00,15.00))
         elif i%4 == 2:
-            Result.append(random.uniform(15.00,20.00))
+            Result.append(random.uniform(18.00,21.00))
         elif i%4 == 3:
-            Result.append(random.uniform(20.00,26.00))
-    Week.append(random.randint(0,1))
-    Skip.append(random.randint(0,1))
+            Result.append(random.uniform(27.00,28.00))
+    Week.append(random.randint(0,2))
+    Skip.append(random.randint(0,2))
     #print(i)
     for k in range(9):
         if i%4 == 0:
-            Choice1.append(random.randint(4,5))
+            Choice1.append(random.randint(0,9))
         elif i%4 == 1:
-            Choice1.append(random.randint(3,4))
+            Choice1.append(random.randint(0,9))
         elif i%4 == 2:
-            Choice1.append(random.randint(2,3))
+            Choice1.append(random.randint(0,9))
         elif i%4 == 3:
-            Choice1.append(random.randint(0,2))
+            Choice1.append(random.randint(0,9))
           
     Choice.append(Choice1)
     Choice1 = []
@@ -62,7 +62,7 @@ def Average(lst):
 pre_data = []
 for i,x in enumerate(data):
     #pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"]] )
-    pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"] * (data[i]["Skip"]+1)] )
+    pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"] * (data[i]["Skip"]+1)*0.5] )
     #pre_data.append([Average(data[i]["Choice"]) * (data[i]["Week"]+1) , data[i]["Result"]] )
 
 

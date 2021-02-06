@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import torch
 import sys
 import random
-
+import csv
+import math
 
 
 
@@ -81,17 +82,9 @@ def k_medoids(similarity_matrix, k):
     num = len(similarity_matrix)
     row_sums = torch.sum(similarity_matrix, dim=1)
     normalized_sim = similarity_matrix.T / row_sums
-
-
-    normalized_sim = normalized_sim.T
-    
+    normalized_sim = normalized_sim.T    
     priority_scores = -torch.sum(normalized_sim, dim=0)
-
-    
-
     values, indices = priority_scores.topk(k)
-
-    
     tmp = -similarity_matrix[:, indices]
     tmp_values, tmp_indices = tmp.topk(1, dim=1)
     min_distance = -torch.sum(tmp_values)
@@ -137,7 +130,7 @@ def k_medoids(similarity_matrix, k):
         tmp_values, tmp_indices = tmp.topk(1, dim=1)
         total_distance = -torch.sum(tmp_values)
         cluster_assignment = tmp_indices.resize_(num)
-        print(total_distance)
+        #print(total_distance)
         
     return indices
 
@@ -146,9 +139,13 @@ medoids = []
 for i in range(4):
     medoids.append(data[indices[i]])
 
+
+df = pd.DataFrame(medoids)
+df.to_csv (r'medoids.csv', index = False, header=False)
+
 medoids = np.asarray(medoids)
 #print(indices)
-print(medoids)
+#print(medoids)
 fig1 = plt.scatter(data[:, 0], data[:, 1])
 #fig2 = plt.scatter(data2[:, 0], data2[:, 1])
 #fig3 = plt.scatter(data3[:, 0], data3[:, 1])
@@ -167,4 +164,40 @@ plt.legend((fig1,  fig5),
            fontsize=10)
 
 plt.savefig('after_k_medoids.png')
-plt.show()
+#plt.show()
+
+
+
+with open('normalized_df.csv', newline='') as f:
+    reader = csv.reader(f)
+    normalized_data = list(reader)
+
+print(normalized_data[len(normalized_data)-1])
+
+with open('medoids.csv', newline='') as f:
+    reader = csv.reader(f)
+    medoids_list = list(reader)
+
+print(medoids_list)
+
+
+last_data = normalized_data[len(normalized_data)-1]
+resu = []
+
+for i in range(len(medoids_list)):
+    resu.append(   math.sqrt((float(medoids_list[i][0])-float(last_data[0])) ** 2) + ((float(medoids_list[i][1])-float(last_data[1])) ** 2)   )
+print(resu)
+
+min_resu = min(resu)
+
+for i in range(len(resu)):
+    if min_resu == resu[i]:
+        resu_no = i
+print(resu_no)
+
+res_med = []
+
+for i in range(len(medoids_list)-1):
+    res_med.append(   (math.sqrt((float(medoids_list[i][0])-float(medoids_list[i+1][0])) ** 2) + ((float(medoids_list[i][1])-float(medoids_list[i+1][1])) ** 2))/2   )
+print(res_med)
+
