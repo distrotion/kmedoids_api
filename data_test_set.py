@@ -71,5 +71,7 @@ for i,x in enumerate(data):
 df = pd.DataFrame(pre_data)
 df.to_csv (r'test_set_01.csv', index = False, header=True)
 
+df = pd.DataFrame(pre_data)
+df.to_csv (r'data_set_01.csv', index = False, header=True)
 #with open('pre_data.json', 'w') as json_file:
-#    json.dump(data, json_file)
+#    json.dump(data, json_file) data_set_01

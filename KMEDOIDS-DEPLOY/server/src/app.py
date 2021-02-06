@@ -1,22 +1,68 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import torch
 import sys
-import random
 import csv
 import math
 import os
 
 from flask  import Flask ,request ,jsonify
 
+import firebase_admin
+from firebase_admin import db
 
 app = Flask(__name__)
 
+firebase_admin.initialize_app(options={
+    'databaseURL': 'https://first-test-api-01-default-rtdb.firebaseio.com',})
+
+#mindfit = db.reference('mindfit')
+
+def Average(lst): 
+    return sum(lst) / len(lst)   
+
+@app.route('/push_data', methods=['POST'])
+def create_data():  
+
+    req = request.json
+    data_push = mindfit.push(req)
+
+    return jsonify({"Status":"OK"})
+
+@app.route('/get_data', methods=['POST'])
+def read_data():
+    data_get = mindfit.get()
+
+    return jsonify(data_get)
 
 @app.route('/k_medoids', methods=['POST'])
 def k__medoids():
 
+	############################################################################################################################
+
+    data_input = request.json 
+    data_push_p = mindfit.push(data_input)
+    input_j = mindfit.get()
+    input_key_list = [*input_j]
+    data = []
+    for i in range(len(input_key_list)):
+        data.append(input_j["{}".format(input_key_list[i])])
+
+	
+
+    pre_data = []
+    for i,x in enumerate(data):
+        #pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"]] )
+        pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"] * (data[i]["Skip"]+1)] )
+        #pre_data.append([Average(data[i]["Choice"]) * (data[i]["Skip"]+1) , data[i]["Result"]] )
+
+
+    #print(pre_data)
+
+    df = pd.DataFrame(pre_data)
+    df.to_csv (r'data_set_01.csv', index = False, header=True)
+
+	############################################################################################################################
 
 	data_input = pd.read_csv('data_set_01.csv')
 	data = np.array([list(row) for row in data_input.values])
@@ -115,27 +161,7 @@ def k__medoids():
 	df.to_csv (r'medoids.csv', index = False, header=False)
 
 	medoids = np.asarray(medoids)
-	#print(indices)
-	#print(medoids)
-	fig1 = plt.scatter(data[:, 0], data[:, 1])
-	#fig2 = plt.scatter(data2[:, 0], data2[:, 1])
-	#fig3 = plt.scatter(data3[:, 0], data3[:, 1])
-	#fig4 = plt.scatter(centers[:, 0], centers[:, 1], marker="+", s=200)
-	fig5 = plt.scatter(medoids[:, 0], medoids[:, 1], marker="*", s=200)
-	plt.title('Gaussian-Mixture Model')
-	plt.xlabel('x')
-	plt.ylabel('y')
-	comm = '''
-	'''
-	plt.legend((fig1,  fig5),
-			('Gaussian1',  'Medoids'),
-			scatterpoints=1,
-			loc='lower left',
-			ncol=2,
-			fontsize=10)
-
-	plt.savefig('after_k_medoids.png')
-	#plt.show()
+		
 
 	################################################################################## find result
 
@@ -256,6 +282,7 @@ def k__medoids():
 	print(point)
 
 	output = {
+		"Uid":data_input['Uid'],
 		"point":point,
 		"position":last_data,
 		"medoids":medoids_list,

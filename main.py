@@ -166,7 +166,7 @@ plt.legend((fig1,  fig5),
 plt.savefig('after_k_medoids.png')
 #plt.show()
 
-
+################################################################################## find result
 
 with open('normalized_df.csv', newline='') as f:
     reader = csv.reader(f)
@@ -188,6 +188,7 @@ for i in range(len(medoids_list)):
     resu.append(   math.sqrt((float(medoids_list[i][0])-float(last_data[0])) ** 2) + ((float(medoids_list[i][1])-float(last_data[1])) ** 2)   )
 print(resu)
 
+
 min_resu = min(resu)
 
 for i in range(len(resu)):
@@ -195,9 +196,99 @@ for i in range(len(resu)):
         resu_no = i
 print(resu_no)
 
-res_med = []
 
-for i in range(len(medoids_list)-1):
-    res_med.append(   (math.sqrt((float(medoids_list[i][0])-float(medoids_list[i+1][0])) ** 2) + ((float(medoids_list[i][1])-float(medoids_list[i+1][1])) ** 2))/2   )
-print(res_med)
+set_resu_min = []
 
+for i in range(len(resu)):
+    if resu[i] > min_resu:
+        set_resu_min.append(resu[i])
+print(set_resu_min)
+
+min_set_resu_min = min(set_resu_min)
+
+for i in range(len(resu)):
+    if resu[i] == min_set_resu_min:
+        set_resu_min_no = i
+print(set_resu_min_no)
+
+max_len = (math.sqrt((float(medoids_list[resu_no][0])-float(medoids_list[set_resu_min_no][0])) ** 2) + ((float(medoids_list[resu_no][1])-float(medoids_list[set_resu_min_no][1])) ** 2))/2
+print(max_len)
+
+
+if resu_no == 0:
+    if min_resu > max_len:
+        point = 5
+    elif min_resu > (max_len*5)/6 and min_resu <= max_len:
+        point = 5
+    elif min_resu > (max_len*4)/6 and min_resu <= (max_len*5)/6:
+        point = 4
+    elif min_resu > (max_len*3)/6 and min_resu <= (max_len*4)/6:
+        point = 3
+    elif min_resu > (max_len*2)/6 and min_resu <= (max_len*3)/6:
+        point = 2
+    elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
+        point = 1
+    elif min_resu > 0 and min_resu <= (max_len*1)/6:
+        point = 0
+
+if resu_no == 1:
+    if min_resu > max_len:
+        point = 12
+    elif min_resu > (max_len*6)/7 and min_resu <= max_len:
+        point = 12
+    elif min_resu > (max_len*5)/7 and min_resu <= (max_len*6)/7:
+        point = 11
+    elif min_resu > (max_len*4)/7 and min_resu <= (max_len*5)/7:
+        point = 10
+    elif min_resu > (max_len*3)/7 and min_resu <= (max_len*4)/7:
+        point = 9
+    elif min_resu > (max_len*2)/7 and min_resu <= (max_len*3)/7:
+        point = 8
+    elif min_resu > (max_len*1)/7 and min_resu <= (max_len*2)/7:
+        point = 7
+    elif min_resu > 0 and min_resu <= (max_len*1)/7:
+        point = 6
+
+if resu_no == 2:
+    if min_resu > max_len:
+        point = 18
+    elif min_resu > (max_len*5)/6 and min_resu <= max_len:
+        point = 18
+    elif min_resu > (max_len*4)/6 and min_resu <= (max_len*5)/6:
+        point = 17
+    elif min_resu > (max_len*3)/6 and min_resu <= (max_len*4)/6:
+        point = 16
+    elif min_resu > (max_len*2)/6 and min_resu <= (max_len*3)/6:
+        point = 15
+    elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
+        point = 14
+    elif min_resu > 0 and min_resu <= (max_len*1)/6:
+        point = 13
+
+if resu_no == 3:
+    if min_resu > max_len:
+        point = 24
+    elif min_resu > (max_len*5)/6 and min_resu <= max_len:
+        point = 24
+    elif min_resu > (max_len*4)/6 and min_resu <= (max_len*5)/6:
+        point = 23
+    elif min_resu > (max_len*3)/6 and min_resu <= (max_len*4)/6:
+        point = 22
+    elif min_resu > (max_len*2)/6 and min_resu <= (max_len*3)/6:
+        point = 21
+    elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
+        point = 20
+    elif min_resu > 0 and min_resu <= (max_len*1)/6:
+        point = 19
+
+
+print(point)
+
+output = {
+    "point":point,
+    "position":last_data,
+    "medoids":medoids_list,
+
+}
+
+print(output)
