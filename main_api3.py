@@ -323,7 +323,7 @@ def k__medoids_all():
     for i in range(len(input_key_list)):
         data.append(input_j["{}".format(input_key_list[i])])
 
-	
+    data_list = data
 
     pre_data = []
     for i,x in enumerate(data):
@@ -576,7 +576,7 @@ def k__medoids_all():
         print(point)
 
         output = {
-            "Uid":data_input_ori['Uid'],
+            "Uid":data_list[i]['Uid'],
             "point":point,
             "position":last_data,
             "medoids":medoids_list,
