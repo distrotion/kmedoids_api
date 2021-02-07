@@ -89,7 +89,7 @@ def k_medoids(similarity_matrix, k):
     tmp_values, tmp_indices = tmp.topk(1, dim=1)
     min_distance = -torch.sum(tmp_values)
     cluster_assignment = tmp_indices.resize_(num)
-    print(min_distance)
+    #print(min_distance)
     
     # Step 2: Update medoids
     for i in range(k):
@@ -109,7 +109,7 @@ def k_medoids(similarity_matrix, k):
     tmp_values, tmp_indices = tmp.topk(1, dim=1)
     total_distance = -torch.sum(tmp_values)
     cluster_assignment = tmp_indices.resize_(num)
-    print(total_distance)
+    #print(total_distance)
         
     while (total_distance < min_distance):
         min_distance = total_distance
@@ -176,9 +176,24 @@ print(normalized_data[len(normalized_data)-1])
 
 with open('medoids.csv', newline='') as f:
     reader = csv.reader(f)
-    medoids_list = list(reader)
+    medoids_list_b = list(reader)
 
-print(medoids_list)
+y_data_m=[]
+for i in range(4):
+    y_data_m.append(float(medoids_list_b[i][1]))
+
+print("before sort ------------->",medoids_list_b)
+y_data_m_s = sorted(y_data_m)
+print("sort y",sorted(y_data_m))
+
+medoids_list=[]
+for i in range(4):
+    for j in range(4):
+        if float(medoids_list_b[j][1]) == y_data_m_s[i]:
+            medoids_list.append(medoids_list_b[j])
+            break
+
+print("after sort ------------->",medoids_list)
 
 
 last_data = normalized_data[len(normalized_data)-1]

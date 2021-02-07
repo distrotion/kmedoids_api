@@ -17,13 +17,13 @@ for i in range(1000):
     
     for j in range(9):
         if i%4 == 0:
-            Result.append(random.uniform(4.00,6.00))
+            Result.append(random.uniform(4.00,24.00))
         elif i%4 == 1:
-            Result.append(random.uniform(12.00,15.00))
+            Result.append(random.uniform(4.00,14.00))
         elif i%4 == 2:
-            Result.append(random.uniform(18.00,21.00))
+            Result.append(random.uniform(4.00,24.00))
         elif i%4 == 3:
-            Result.append(random.uniform(27.00,28.00))
+            Result.append(random.uniform(4.00,24.00))
     Week.append(random.randint(0,2))
     Skip.append(random.randint(0,2))
     #print(i)

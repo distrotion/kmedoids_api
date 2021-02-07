@@ -174,9 +174,24 @@ def k__medoids():
 
     with open('medoids.csv', newline='') as f:
         reader = csv.reader(f)
-        medoids_list = list(reader)
+        medoids_list_b = list(reader)
 
-    print(medoids_list)
+    y_data_m=[]
+    for i in range(4):
+        y_data_m.append(float(medoids_list_b[i][1]))
+
+    print("before sort ------------->",medoids_list_b)
+    y_data_m_s = sorted(y_data_m)
+    print("sort y",sorted(y_data_m))
+
+    medoids_list=[]
+    for i in range(4):
+        for j in range(4):
+            if float(medoids_list_b[j][1]) == y_data_m_s[i]:
+                medoids_list.append(medoids_list_b[j])
+                break
+
+    print("after sort ------------->",medoids_list)
 
 
     last_data = normalized_data[len(normalized_data)-1]
