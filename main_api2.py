@@ -286,7 +286,8 @@ def k__medoids():
         "Uid":data_input_ori['Uid'],
         "point":point,
         "position":last_data,
-        "medoids":medoids_list
+        "medoids":medoids_list,
+        "po_length":resu
     }
 
     print(output)	
