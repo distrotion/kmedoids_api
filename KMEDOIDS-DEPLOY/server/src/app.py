@@ -40,7 +40,8 @@ def k__medoids():
 
 	############################################################################################################################
 
-    data_input = request.json 
+    data_input = request.json
+    data_input_ori = request.json 
     data_push_p = mindfit.push(data_input)
     input_j = mindfit.get()
     input_key_list = [*input_j]
@@ -282,7 +283,7 @@ def k__medoids():
     print(point)
 
     output = {
-        "Uid":data_input['Uid'],
+        "Uid":data_input_ori['Uid'],
         "point":point,
         "position":last_data,
         "medoids":medoids_list
