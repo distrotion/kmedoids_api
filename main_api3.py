@@ -16,7 +16,7 @@ app = Flask(__name__)
 firebase_admin.initialize_app(options={
     'databaseURL': 'https://first-test-api-01-default-rtdb.firebaseio.com',})
 
-mindfit = db.reference('mindfit')
+#mindfit = db.reference('mindfit')
 
 def Average(lst): 
     return sum(lst) / len(lst)   
