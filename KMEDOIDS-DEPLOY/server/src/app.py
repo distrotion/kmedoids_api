@@ -302,7 +302,8 @@ def k__medoids():
         "point":point,
         "position":last_data,
         "medoids":medoids_list,
-        "po_length":resu
+        "po_length":resu,
+        "max_len":max_len
     }
 
     print(output)	
