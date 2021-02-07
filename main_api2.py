@@ -36,7 +36,7 @@ def read_data():
     return jsonify(data_get)
 
 @app.route('/k_medoids', methods=['POST'])
-def k__medoids():
+def kmedoids():
 
 	############################################################################################################################
 
@@ -282,7 +282,7 @@ def k__medoids():
     print(point)
 
     output = {
-        "Uid":data_input['Uid'],
+        #"Uid":data_input['Uid'],
         "point":point,
         "position":last_data,
         "medoids":medoids_list,
