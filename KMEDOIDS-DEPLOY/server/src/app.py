@@ -241,7 +241,7 @@ def k__medoids():
             point = 2
         elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
             point = 1
-        elif min_resu > 0 and min_resu <= (max_len*1)/6:
+        elif min_resu => 0 and min_resu <= (max_len*1)/6:
             point = 0
 
     if resu_no == 1:
@@ -259,7 +259,7 @@ def k__medoids():
             point = 8
         elif min_resu > (max_len*1)/7 and min_resu <= (max_len*2)/7:
             point = 7
-        elif min_resu > 0 and min_resu <= (max_len*1)/7:
+        elif min_resu => 0 and min_resu <= (max_len*1)/7:
             point = 6
 
     if resu_no == 2:
@@ -275,7 +275,7 @@ def k__medoids():
             point = 15
         elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
             point = 14
-        elif min_resu > 0 and min_resu <= (max_len*1)/6:
+        elif min_resu => 0 and min_resu <= (max_len*1)/6:
             point = 13
 
     if resu_no == 3:
@@ -291,7 +291,7 @@ def k__medoids():
             point = 21
         elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
             point = 20
-        elif min_resu > 0 and min_resu <= (max_len*1)/6:
+        elif min_resu => 0 and min_resu <= (max_len*1)/6:
             point = 19
 
 
@@ -519,7 +519,7 @@ def k__medoids_all():
                 point = 2
             elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
                 point = 1
-            elif min_resu > 0 and min_resu <= (max_len*1)/6:
+            elif min_resu => 0 and min_resu <= (max_len*1)/6:
                 point = 0
 
         if resu_no == 1:
@@ -537,7 +537,7 @@ def k__medoids_all():
                 point = 8
             elif min_resu > (max_len*1)/7 and min_resu <= (max_len*2)/7:
                 point = 7
-            elif min_resu > 0 and min_resu <= (max_len*1)/7:
+            elif min_resu => 0 and min_resu <= (max_len*1)/7:
                 point = 6
 
         if resu_no == 2:
@@ -553,7 +553,7 @@ def k__medoids_all():
                 point = 15
             elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
                 point = 14
-            elif min_resu > 0 and min_resu <= (max_len*1)/6:
+            elif min_resu => 0 and min_resu <= (max_len*1)/6:
                 point = 13
 
         if resu_no == 3:
@@ -569,7 +569,7 @@ def k__medoids_all():
                 point = 21
             elif min_resu > (max_len*1)/6 and min_resu <= (max_len*2)/6:
                 point = 20
-            elif min_resu > 0 and min_resu <= (max_len*1)/6:
+            elif min_resu => 0 and min_resu <= (max_len*1)/6:
                 point = 19
 
 
