@@ -17,25 +17,25 @@ for i in range(1000):
     
     for j in range(9):
         if i%4 == 0:
-            Result.append(random.uniform(4.00,24.00))
+            Result.append(random.randint(3.00,9.00))
         elif i%4 == 1:
-            Result.append(random.uniform(4.00,14.00))
+            Result.append(random.randint(10.00,14.00))
         elif i%4 == 2:
-            Result.append(random.uniform(4.00,24.00))
+            Result.append(random.randint(16.00,20.00))
         elif i%4 == 3:
-            Result.append(random.uniform(4.00,24.00))
+            Result.append(random.randint(22.00,24.00))
     Week.append(random.randint(0,2))
     Skip.append(random.randint(0,2))
     #print(i)
     for k in range(9):
         if i%4 == 0:
-            Choice1.append(random.randint(0,9))
+            Choice1.append(random.randint(0,4))
         elif i%4 == 1:
-            Choice1.append(random.randint(0,9))
+            Choice1.append(random.randint(2,6))
         elif i%4 == 2:
-            Choice1.append(random.randint(0,9))
+            Choice1.append(random.randint(4,7))
         elif i%4 == 3:
-            Choice1.append(random.randint(0,9))
+            Choice1.append(random.randint(6,9))
           
     Choice.append(Choice1)
     Choice1 = []

@@ -45,7 +45,7 @@ plt.show()
 
 
 '''
-data_input = pd.read_csv('test_set_01.csv')
+data_input = pd.read_csv('data_set_01.csv')
 data = np.array([list(row) for row in data_input.values])
 print(type(data))
 print(len(data))

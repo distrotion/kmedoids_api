@@ -5,6 +5,7 @@ import sys
 import csv
 import math
 import os
+import matplotlib.pyplot as plt
 
 from flask  import Flask ,request ,jsonify
 
@@ -14,7 +15,7 @@ from firebase_admin import db
 app = Flask(__name__)
 
 firebase_admin.initialize_app(options={
-    'databaseURL': 'https://nicetynine-mind-fit.firebaseio.com',})
+    'databaseURL': 'https://first-test-api-01-default-rtdb.firebaseio.com',})
 
 #mindfit = db.reference('mindfit')
 
@@ -40,10 +41,12 @@ def k__medoids():
 
 	############################################################################################################################
 
-    data_input = request.json
-    data_input_ori = request.json 
-    data_push_p = mindfit.push(data_input)
-    input_j = mindfit.get()
+    #data_input = request.json
+    #data_input_ori = request.json 
+    #data_push_p = mindfit.push(data_input)
+    #input_j = mindfit.get()
+
+    input_j = request.json
     input_key_list = [*input_j]
     data = []
     for i in range(len(input_key_list)):
@@ -54,8 +57,8 @@ def k__medoids():
     pre_data = []
     for i,x in enumerate(data):
         #pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"]] )
-        pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"] * (data[i]["Skip"]+1)] )
-        #pre_data.append([Average(data[i]["Choice"]) * (data[i]["Skip"]+1) , data[i]["Result"]] )
+        #pre_data.append([Average(data[i]["Choice"]) , data[i]["Result"] * (data[i]["Skip"]+1)] )
+        pre_data.append([Average(data[i]["Choice"]) * (data[i]["Skip"]+1) , data[i]["Result"]] )
 
 
     #print(pre_data)
@@ -77,6 +80,20 @@ def k__medoids():
 
     data = np.array(normalized_df)
     # construct the similarity matrix
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
     num = len(data)
     similarity_matrix = np.zeros((num, num))
 
@@ -112,6 +129,7 @@ def k__medoids():
         # Step 2: Update medoids
         for i in range(k):
             sub_indices = (cluster_assignment == i).nonzero()
+            print("4444444444444444444444444444444444444444444444444444444444444444444444444444444444444===",i)
             sub_num = len(sub_indices)
             sub_indices = sub_indices.resize_(sub_num)
             sub_similarity_matrix = torch.index_select(similarity_matrix, 0, sub_indices)
@@ -121,20 +139,21 @@ def k__medoids():
             # update the cluster medoid index
             indices[i] = sub_indices[sub_medoid_index]
 
-
+            
+        
         # Step 3: Assign objects to medoids
         tmp = -similarity_matrix[:, indices]
+        
         tmp_values, tmp_indices = tmp.topk(1, dim=1)
         total_distance = -torch.sum(tmp_values)
         cluster_assignment = tmp_indices.resize_(num)
         print(total_distance)
-            
+
         while (total_distance < min_distance):
             min_distance = total_distance
             # Step 2: Update medoids
             for i in range(k):
                 sub_indices = (cluster_assignment == i).nonzero()
-                print("4444444444444444444444444444444444444444444444444444444444444444444444444444444444444===",i)
                 sub_num = len(sub_indices)
                 sub_indices = sub_indices.resize_(sub_num)
                 sub_similarity_matrix = torch.index_select(similarity_matrix, 0, sub_indices)
@@ -154,6 +173,7 @@ def k__medoids():
         return indices
 
     indices = k_medoids(similarity_matrix, k=4)
+    
     medoids = []
     for i in range(4):
         medoids.append(data[indices[i]])
@@ -166,7 +186,7 @@ def k__medoids():
         
 
     ################################################################################## find result
-
+    
     with open('normalized_df.csv', newline='') as f:
         reader = csv.reader(f)
         normalized_data = list(reader)
@@ -299,7 +319,7 @@ def k__medoids():
     print(point)
 
     output = {
-        "Uid":data_input_ori['Uid'],
+        #"Uid":data_input_ori['Uid'],
         "point":point,
         "position":last_data,
         "medoids":medoids_list,
