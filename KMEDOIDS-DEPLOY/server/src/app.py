@@ -14,7 +14,7 @@ from firebase_admin import db
 app = Flask(__name__)
 
 firebase_admin.initialize_app(options={
-    'databaseURL': 'https://nicetynine-mind-fit.firebaseio.com/',})
+    'databaseURL': 'https://nicetynine-mind-fit.firebaseio.com',})
 
 mindfit = db.reference('mindfit')
 
