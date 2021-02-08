@@ -6,6 +6,7 @@ import csv
 import math
 import os
 import matplotlib.pyplot as plt
+import time
 
 from flask  import Flask ,request ,jsonify
 
@@ -74,22 +75,38 @@ def k__medoids():
     print(len(data))
 
     df = pd.DataFrame(data)
-    normalized_df=(df-df.min())/(df.max()-df.min())
+    #normalized_df=(df-df.min())/(df.max()-df.min())
     #normalized_df=(df-df.mean())/df.std()
-    normalized_df.to_csv (r'normalized_df.csv', index = False, header=True)
+    df.to_csv (r'normalized_df.csv', index = False, header=True)
 
-    data = np.array(normalized_df)
+    data = np.array(df)
     # construct the similarity matrix
 
 
 
- 
 
-
-
-
-
-
+    #medoids = np.asarray(medoids)
+    #print(indices)
+    #print(medoids)
+    fig1 = plt.scatter(data[:, 0], data[:, 1])
+    #fig2 = plt.scatter(data2[:, 0], data2[:, 1])
+    #fig3 = plt.scatter(data3[:, 0], data3[:, 1])
+    #fig4 = plt.scatter(centers[:, 0], centers[:, 1], marker="+", s=200)
+    #fig5 = plt.scatter(medoids[:, 0], medoids[:, 1], marker="*", s=200)
+    plt.title('Gaussian-Mixture Model')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    comm = '''
+    
+    plt.legend((fig1),
+            ('Gaussian1'),
+            scatterpoints=1,
+            loc='lower left',
+            ncol=2,
+            fontsize=10)
+    '''
+    plt.savefig('after_k_medoids.png')
+    plt.show()
 
 
 
@@ -129,7 +146,6 @@ def k__medoids():
         # Step 2: Update medoids
         for i in range(k):
             sub_indices = (cluster_assignment == i).nonzero()
-            print("4444444444444444444444444444444444444444444444444444444444444444444444444444444444444===",i)
             sub_num = len(sub_indices)
             sub_indices = sub_indices.resize_(sub_num)
             sub_similarity_matrix = torch.index_select(similarity_matrix, 0, sub_indices)
@@ -184,6 +200,30 @@ def k__medoids():
 
     medoids = np.asarray(medoids)
         
+
+
+    #print(indices)
+    #print(medoids)
+    fig1 = plt.scatter(data[:, 0], data[:, 1])
+    #fig2 = plt.scatter(data2[:, 0], data2[:, 1])
+    #fig3 = plt.scatter(data3[:, 0], data3[:, 1])
+    #fig4 = plt.scatter(centers[:, 0], centers[:, 1], marker="+", s=200)
+    fig5 = plt.scatter(medoids[:, 0], medoids[:, 1], marker="*", s=200)
+    plt.title('Gaussian-Mixture Model')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    comm = '''
+    '''
+    plt.legend((fig1,  fig5),
+            ('Gaussian1',  'Medoids'),
+            scatterpoints=1,
+            loc='lower left',
+            ncol=2,
+            fontsize=10)
+
+    plt.savefig('after_k_medoids.png')
+    plt.show()
+
 
     ################################################################################## find result
     
