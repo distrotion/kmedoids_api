@@ -19,7 +19,14 @@ firebase_admin.initialize_app(options={
 #mindfit = db.reference('mindfit')
 
 def Average(lst): 
-    return sum(lst) / len(lst)   
+    return sum(lst) / len(lst)
+
+@app.route('/test', methods=['POST'])
+def test():  
+
+    req1 = request.json
+
+    return jsonify({"Status":"OK"})   
 
 @app.route('/push_data', methods=['POST'])
 def create_data():  
