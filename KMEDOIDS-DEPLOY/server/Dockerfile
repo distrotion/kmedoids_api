@@ -6,6 +6,7 @@ RUN pip install flask
 RUN pip install sklearn
 RUN pip install firebase-admin
 RUN pip install torch torchvision
+RUN pip install jsonify
 
 COPY src/ app/
 
