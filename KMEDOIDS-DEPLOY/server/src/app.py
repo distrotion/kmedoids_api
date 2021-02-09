@@ -16,7 +16,7 @@ app = Flask(__name__)
 firebase_admin.initialize_app(options={
     'databaseURL': 'https://nicetynine-mind-fit.firebaseio.com',})
 
-mindfit = db.reference('mindfit')
+#mindfit = db.reference('mindfit')
 
 def Average(lst): 
     return sum(lst) / len(lst)
@@ -68,17 +68,17 @@ def k__medoids():
     #print(pre_data)
 
     df = pd.DataFrame(pre_data)
-    #df.to_csv (r'data_set_01.csv', index = False, header=True)
+    df.to_csv (r'data_set_01.csv', index = False, header=True)
 
 	############################################################################################################################
 
-    #data_input = pd.read_csv('data_set_01.csv')
-    #data = np.array([list(row) for row in data_input.values])
+    data_input = pd.read_csv('data_set_01.csv')
+    data = np.array([list(row) for row in data_input.values])
     
-    #print(type(data))
-    #print(len(data))
+    print(type(data))
+    print(len(data))
 
-    #df = pd.DataFrame(data)
+    df = pd.DataFrame(data)
     normalized_df=(df-df.min())/(df.max()-df.min())
     #normalized_df=(df-df.mean())/df.std()
     #normalized_df.to_csv (r'normalized_df.csv', index = False, header=True)
@@ -347,16 +347,16 @@ def k__medoids_all():
     #print(pre_data)
 
     df = pd.DataFrame(pre_data)
-    #df.to_csv (r'data_set_01.csv', index = False, header=True)
+    df.to_csv (r'data_set_01.csv', index = False, header=True)
 
 	############################################################################################################################
 
-    #data_input = pd.read_csv('data_set_01.csv')
-    #data = np.array([list(row) for row in data_input.values])
-    #print(type(data))
-    #print(len(data))
+    data_input = pd.read_csv('data_set_01.csv')
+    data = np.array([list(row) for row in data_input.values])
+    print(type(data))
+    print(len(data))
 
-    #df = pd.DataFrame(data)
+    df = pd.DataFrame(data)
     normalized_df=(df-df.min())/(df.max()-df.min())
     #normalized_df=(df-df.mean())/df.std()
     #normalized_df.to_csv (r'normalized_df.csv', index = False, header=True)
@@ -601,7 +601,7 @@ def k__medoids_all():
         }
 
         out_put_set.append(output)
-        print(output)
+        #print(output)
         output = {}	
 
     return jsonify(out_put_set)
